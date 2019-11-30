@@ -65,10 +65,10 @@ for j=1:n_sample
 end
 
 ParamHat=mean(best_samples(find(best_samples(:,1)==min(best_samples(:,1))),2:end),1);
-[GoF, LL] = SocialInfo_Bayesian(ParamHat, J1,C,Js,Ch,Gr,nTrial);
+[GoF, Hat] = SocialInfo_Bayesian(ParamHat, J1,C,Js,Ch,Gr,nTrial);
 
-BIC = -2*LL + length(ParamHat);
-fprintf ('Loglikelihood: %f, BIC: %f \n ', LL, BIC);
+BIC = -2*Hat.LL + length(ParamHat);
+fprintf ('Loglikelihood: %f, BIC: %f \n ', Hat.LL, BIC);
 ParamHat
 
 toc
