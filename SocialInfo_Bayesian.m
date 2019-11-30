@@ -1,4 +1,4 @@
-function [GoF, LL] = SocialInfo_Bayesian(params,J1,C,Js,Ch,Gr,nTrial)
+function [GoF, Hat] = SocialInfo_Bayesian(params,J1,C,Js,Ch,Gr,nTrial)
     %global LL
     for tr=1:nTrial
         
@@ -42,5 +42,8 @@ function [GoF, LL] = SocialInfo_Bayesian(params,J1,C,Js,Ch,Gr,nTrial)
         L(tr) =-(log(2*pi*epsilon)+1/epsilon*(Ch(tr)-ChHat(tr))^2)/2;
     end
     LL=sum(L);
-
+    
+    Hat.ChHat=ChHat;
+    Hat.LL=LL;
+    
 end
