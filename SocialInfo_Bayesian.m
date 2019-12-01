@@ -21,13 +21,13 @@ function [GoF, Hat] = SocialInfo_Bayesian(params,J1,C,Js,Ch,Gr,nTrial)
         S0 = normpdf(J_rng,J1_mu,J1_sigma); % prior belief self
         S1 = normpdf(J_rng,J2_mu,J2_sigma); % posterior belief self
         
-        S0=S0/sum(S0);
-        S1=S1/sum(S1);
-        
-        nonzeromin = 0.1e-15; % Considering that it is not possible to compute DKL for log(0) = -Inf.
+        nonzeromin = 0.1e-15; % DKL(0||0)=Inf.
         S0(find(S0<nonzeromin))=nonzeromin;
         S1(find(S1<nonzeromin))=nonzeromin;
         KL(tr) = -dot(S0,log2(S1)-log2(S0));
+
+        S0n=S0/sum(S0);
+        S1n=S1/sum(S1);
 
     end
     
